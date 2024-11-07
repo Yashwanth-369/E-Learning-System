@@ -14,14 +14,17 @@ public class Course {
     private String courseName;
     private String courseYear;
 
+    private boolean available;
+
     // Constructors, Getters, Setters
     public Course() {}
 
-    public Course(String courseType, String courseDescription, String courseName, String courseYear) {
+    public Course(String courseType, String courseDescription, String courseName, String courseYear, boolean available) {
         this.courseType = courseType;
         this.courseDescription = courseDescription;
         this.courseName = courseName;
         this.courseYear = courseYear;
+        this.available = available;
     }
 
     public Long getCourseId() {
@@ -62,5 +65,13 @@ public class Course {
 
     public void setCourseYear(String courseYear) {
         this.courseYear = courseYear;
+    }
+
+    public boolean isAvailable() {
+        return available;
+    }
+
+    public void setAvailable(boolean available) {
+        this.available = available;
     }
 }
