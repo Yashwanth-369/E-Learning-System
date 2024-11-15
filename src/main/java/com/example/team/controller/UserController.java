@@ -42,6 +42,16 @@ public class UserController {
         return ResponseEntity.ok("Logged out successfully.");
     }
 
+    @DeleteMapping("/{id}")
+public ResponseEntity<String> deleteUser(@PathVariable Long id) {
+    boolean isDeleted = userService.deleteUserById(id);
+    if (isDeleted) {
+        return ResponseEntity.ok("User deleted successfully.");
+    }
+    return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found.");
+}
+
+
     @PostMapping("/reset-password-request")
     public ResponseEntity<String> requestPasswordReset(@RequestBody EmailDTO emailDTO) {
        boolean isEmailSent = userService.sendPasswordResetEmail(emailDTO.getEmail());

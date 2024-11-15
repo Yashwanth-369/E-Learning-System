@@ -143,4 +143,14 @@ public class UserService {
         mailSender.send(mailMessage);
         System.out.println("Email sent to: " + to);
     }
+
+    public boolean deleteUserById(Long id) {
+        Optional<User> userOptional = userRepository.findById(id);
+        if (userOptional.isPresent()) {
+            userRepository.deleteById(id);
+            return true;
+        }
+        return false;
+    }
+    
 }

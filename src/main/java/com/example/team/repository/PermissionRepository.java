@@ -10,15 +10,11 @@ import java.util.List;
 @Repository
 public interface PermissionRepository extends JpaRepository<Permission, Long> {
 
-    // Find all permissions for a specific role
     List<Permission> findByRole(Role role);
 
-    // Find permissions by title
     List<Permission> findByPermissionTitle(String permissionTitle);
 
-    // Find permissions by module name
     List<Permission> findByPermissionModule(String permissionModule);
 
-    // Optional: Find permissions by both title and module
     List<Permission> findByPermissionTitleAndPermissionModule(String permissionTitle, String permissionModule);
 }
