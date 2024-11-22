@@ -27,6 +27,30 @@ public class RegistrationDTO {
         this.course = course;
     }
 
+
+     // Validation method
+     public boolean validateRegistrationDTO() {
+        if (this.fullName == null || this.fullName.isEmpty()) {
+            return false; // Full Name is required
+        }
+        if (this.email == null || !this.email.matches("^[A-Za-z0-9+_.-]+@(.+)$")) {
+            return false; // Invalid email format
+        }
+        if (this.password == null || this.password.length() < 6) {
+            return false; // Password must be at least 6 characters
+        }
+        if (this.phoneNo != null && !this.phoneNo.matches("\\d{10}")) {
+            return false; // Optional phone number must be 10 digits
+        }
+        if (this.address == null || this.address.isEmpty()) {
+            return false; // Address is required
+        }
+        if (this.course == null || this.course.isEmpty()) {
+            return false; // Course is required
+        }
+        return true;
+    }
+   /*
     public boolean validateRegistrationDTO(RegistrationDTO dto) {
         if (dto.getFullName() == null || dto.getFullName().isEmpty()) {
             return false; // Full Name is required
@@ -42,7 +66,7 @@ public class RegistrationDTO {
         }
         return true;
     }
-    
+     */
 
     // Getters and Setters
     public String getFullName() {

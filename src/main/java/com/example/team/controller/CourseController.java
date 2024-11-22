@@ -18,6 +18,16 @@ public class CourseController {
         this.courseService = courseService;
     }
 
+     @PostMapping("/{id}/enroll")
+     public ResponseEntity<String> enrollInCourse(@PathVariable Long id, @RequestParam String email) {
+       String responseMessage = courseService.enrollInCourse(id, email);
+        if ("Course not found!".equals(responseMessage)) {
+          return ResponseEntity.status(HttpStatus.NOT_FOUND).body(responseMessage);
+      }
+      return ResponseEntity.ok(responseMessage);
+    }
+
+
     // Endpoint to add a new course
     @PostMapping("/add")
     public ResponseEntity<String> addCourse(@RequestBody CourseDTO courseDTO) {

@@ -2,6 +2,9 @@ package com.example.team.service;
 
 import com.example.team.dto.CourseDTO;
 import com.example.team.model.Course;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import com.example.team.repository.CourseRepository;
 import org.springframework.stereotype.Service;
 
@@ -13,9 +16,33 @@ import java.util.stream.Collectors;
 public class CourseService {
 
     private final CourseRepository courseRepository;
+    @Autowired
+    private JavaMailSender mailSender;
 
     public CourseService(CourseRepository courseRepository) {
         this.courseRepository = courseRepository;
+    }
+
+    public String enrollInCourse(Long courseId, String email) {
+        Optional<Course> courseOptional = courseRepository.findById(courseId);
+        if (courseOptional.isPresent()) {
+            Course course = courseOptional.get();
+            sendEnrollmentConfirmationEmail(email, course);
+            return "Enrollment successful. Confirmation email sent!";
+        }
+        return "Course not found!";
+    }
+
+
+    private void sendEnrollmentConfirmationEmail(String email, Course course) {
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setTo(email);
+        message.setSubject("Course Enrollment Confirmation");
+        message.setText("Dear User,\n\nYou have successfully enrolled in the course: " +
+                course.getCourseName() + " (" + course.getCourseType() + ").\n\n" +
+                "Course Description: " + course.getCourseDescription() + "\n\n" +
+                "Thank you for enrolling!\n\nBest regards,\nTeam");
+        mailSender.send(message);
     }
 
     // Method to register a new course
