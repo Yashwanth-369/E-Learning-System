@@ -37,6 +37,7 @@ public class SecurityConfig {
                     "/api/users/verify-otp",
                     "/api/courses", // GET all courses
                     "/api/courses/{id}", // GET course by ID
+                    "/api/courses/{id}/enroll", 
                     "/api/durations",
                     "/api/durations/type",
                     "/api/durations/total-hours",
