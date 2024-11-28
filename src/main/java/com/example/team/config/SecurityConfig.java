@@ -22,6 +22,96 @@ public class SecurityConfig {
             // Disable CSRF for stateless APIs
             .csrf(csrf -> csrf.disable())
 
+            // Allow requests from the Angular frontend (CORS configuration)
+            .cors(Customizer.withDefaults())
+
+            // Set session management to stateless
+            .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+
+            // Define endpoint authorization rules
+            .authorizeHttpRequests(auth -> auth
+                // Public endpoints
+                .requestMatchers(
+                    "/api/users/register",
+                    "/api/users/login",
+                    "/api/users/logout",
+                    "/api/users/reset-password-request",
+                    "/api/users/reset-password",
+                    "/api/users/verify-otp",
+                    "/api/courses", // GET all courses
+                    "/api/courses/{id}", // GET course by ID
+                    "/api/durations",
+                    "/api/durations/type",
+                    "/api/durations/total-hours",
+                    "/api/durations/description",
+                    "/api/fees",
+                    "/api/permissions",
+                    "/api/roles",
+                    "/api/schedules"
+                ).permitAll()
+
+                // User-specific endpoints
+                .requestMatchers("/user/**").hasRole("USER")
+
+                // Admin-specific endpoints
+                .requestMatchers("/admin/**").hasRole("ADMIN")
+
+                // All other requests require authentication
+                .anyRequest().permitAll()
+            )
+
+            // Enable HTTP Basic Authentication
+            .httpBasic(Customizer.withDefaults())
+
+            // Configure logout functionality
+            .logout(logout -> logout
+                .logoutUrl("/api/users/logout")
+                .permitAll()
+            );
+
+        return http.build();
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder(); // BCrypt for secure password encoding
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+/* package com.example.team.config;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.SecurityFilterChain;
+
+@Configuration
+@EnableWebSecurity
+@EnableMethodSecurity(prePostEnabled = true) // Enables method-level security
+public class SecurityConfig {
+
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        http
+            // Disable CSRF for stateless APIs
+            .csrf(csrf -> csrf.disable())
+
             // Set session management to stateless
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 
@@ -100,7 +190,7 @@ public class SecurityConfig {
 
 
 
-/*package com.example.team.config;          //data 2024-11-22
+package com.example.team.config;          //data 2024-11-22
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

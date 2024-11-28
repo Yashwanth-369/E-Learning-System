@@ -2,7 +2,7 @@ package com.example.team.controller;
 
 import com.example.team.dto.*;
 import com.example.team.service.UserService;
-import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatus; 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,15 +17,18 @@ public class UserController {
     }
 
     @PostMapping("/register")
+    @CrossOrigin(origins = "http://localhost:4200")
     public ResponseEntity<String> registerUser(@RequestBody RegistrationDTO registrationDTO) {
         String responseMessage = userService.registerUser(registrationDTO);
-        if ("Registration successful!".equals(responseMessage)) {
+        System.out.println(responseMessage);
+        if(responseMessage!=null && responseMessage.contains("Registration successful")){
             return ResponseEntity.status(HttpStatus.CREATED).body(responseMessage);
         }
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseMessage);
     }
 
     @PostMapping("/verify-otp")
+    @CrossOrigin(origins = "http://localhost:4200")
     public ResponseEntity<String> verifyOtp(@RequestParam("email") String email, @RequestParam("otp") String otp) {
         boolean isVerified = userService.verifyOtp(email, otp);
         if (isVerified) {
@@ -35,6 +38,7 @@ public class UserController {
     }
 
     @PostMapping("/login")
+    @CrossOrigin(origins = "http://localhost:4200")
     public ResponseEntity<String> loginUser(@RequestBody LoginDTO loginDTO) {
         boolean isAuthenticated = userService.authenticateUser(loginDTO);
         if (isAuthenticated) {
@@ -44,6 +48,7 @@ public class UserController {
     }
 
     @PostMapping("/logout")
+    @CrossOrigin(origins = "http://localhost:4200")
     public ResponseEntity<String> logout() {
         return ResponseEntity.ok("Logged out successfully.");
     }

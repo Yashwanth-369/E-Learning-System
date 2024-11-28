@@ -16,11 +16,15 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler {
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
                                         Authentication authentication) throws IOException {
         // Redirect based on the role
-        if (authentication.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ADMIN"))) { //("ROLE_ADMIN")
+        if (authentication.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ADMIN"))) 
+        { 
             response.sendRedirect("/admin/dashboard");
-        } else if (authentication.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_USER"))) { //("ROLE_USER")
+        } 
+        else if (authentication.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_USER"))) 
+        { 
             response.sendRedirect("/user/home");
-        } else {
+        } else 
+        {
             response.sendRedirect("/default");
         }
     }

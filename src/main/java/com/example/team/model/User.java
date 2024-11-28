@@ -159,8 +159,4 @@ public class User {
         this.resetTokenExpiry = resetTokenExpiry;
     }
 
-  /* public static Object builder() {
-        throw new UnsupportedOperationException("Unimplemented method 'builder'");
-    }
-   */ 
 }
