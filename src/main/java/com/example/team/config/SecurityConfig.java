@@ -50,11 +50,14 @@ public class SecurityConfig {
                     "/api/schedules"
                 ).permitAll()
 
+
+                .requestMatchers("/api/feedback/**").permitAll()
+
                 // User-specific endpoints
-                .requestMatchers("/user/**").hasRole("USER")
+                // .requestMatchers("/user/**").hasRole("USER")
 
                 // Admin-specific endpoints
-                .requestMatchers("/admin/**").hasRole("ADMIN")
+                // .requestMatchers("/admin/**").hasRole("ADMIN")
 
                 // All other requests require authentication
                 .anyRequest().permitAll()

@@ -28,7 +28,6 @@ public class CourseController {
       return ResponseEntity.ok(responseMessage);
     }
 
-
     // Endpoint to add a new course
     @PostMapping("/add")
     public ResponseEntity<String> addCourse(@RequestBody CourseDTO courseDTO) {

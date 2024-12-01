@@ -83,6 +83,7 @@ public class UserService {
             if (!user.isVerified()) {
                 return false;
             }
+            System.out.println(loginDTO.getPassword()+"login password and user password "+user.getPassword());
             return passwordEncoder.matches(loginDTO.getPassword(), user.getPassword());
         }
         return false;
@@ -134,7 +135,7 @@ public class UserService {
                 registrationDTO.getPhoneNo(),
                 registrationDTO.getCourse(),
                 new Date(),
-                "USER", // Default role
+                "student", // Default role
                 false // Verified status
         );
     }
