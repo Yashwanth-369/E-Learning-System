@@ -7,6 +7,7 @@ import com.example.team.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -156,6 +157,17 @@ public class UserService {
         }
         return false;
     }
+
+    public String getUserEmail(String email) {
+        // Use Optional to retrieve the user
+        Optional<User> optionalUser = userRepository.findByEmail(email);
+        if (optionalUser.isPresent()) {
+            return optionalUser.get().getEmail(); // Extract and return the email
+        }
+        // Throw an exception if the user is not found
+        throw new UsernameNotFoundException("User not found with email: " + email);
+    }
+    
 }
 
 

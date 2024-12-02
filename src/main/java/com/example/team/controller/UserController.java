@@ -42,7 +42,8 @@ public class UserController {
     public ResponseEntity<String> loginUser(@RequestBody LoginDTO loginDTO) {
         boolean isAuthenticated = userService.authenticateUser(loginDTO);
         if (isAuthenticated) {
-            return ResponseEntity.ok("Login successful");
+            String userEmail=userService.getUserEmail(loginDTO.getEmail());
+            return ResponseEntity.ok(userEmail);
         }
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
     }
