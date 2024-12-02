@@ -54,13 +54,13 @@ public class SecurityConfig {
                 .requestMatchers("/api/feedback/**").permitAll()
 
                 // User-specific endpoints
-                // .requestMatchers("/user/**").hasRole("USER")
+                // .requestMatchers("/user/**").hasRole("student")
 
                 // Admin-specific endpoints
                 // .requestMatchers("/admin/**").hasRole("ADMIN")
 
-                // All other requests require authentication
-                .anyRequest().permitAll()
+
+                .anyRequest().authenticated()
             )
 
             // Enable HTTP Basic Authentication
