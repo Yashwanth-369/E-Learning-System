@@ -61,7 +61,7 @@ public class SecurityConfig {
                 // .requestMatchers("/admin/**").hasRole("ADMIN")
 
 
-                .anyRequest().permitAll()
+                .anyRequest().authenticated()
             )
 
             // Enable HTTP Basic Authentication
