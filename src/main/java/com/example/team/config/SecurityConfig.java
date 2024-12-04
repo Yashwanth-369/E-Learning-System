@@ -48,7 +48,8 @@ public class SecurityConfig {
                     "/api/fees",
                     "/api/permissions",
                     "/api/roles",
-                    "/api/schedules"
+                    "/api/schedules",
+                    "/api/feedback/{userEmail}"
                 ).permitAll()
 
 

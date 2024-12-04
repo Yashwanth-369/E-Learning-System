@@ -40,36 +40,3 @@ public class FeedbackController {
     }
 }
 
-
-
-
-
-/*package com.example.team.controller;
-
-import com.example.team.dto.FeedbackDTO;
-import com.example.team.service.FeedbackService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-@RestController
-@RequestMapping("/api/feedback")
-public class FeedbackController {
-
-    @Autowired
-    private FeedbackService feedbackService;
-
-    // Endpoint to save feedback by userEmail
-    @PostMapping("/{userEmail}")
-    public ResponseEntity<String> saveFeedback(@PathVariable String userEmail, @RequestBody FeedbackDTO feedbackDTO) {
-        try {
-            // Calling service to save feedback
-            feedbackService.saveFeedback(userEmail, feedbackDTO);
-            return ResponseEntity.ok("Feedback saved successfully!");
-        } catch (RuntimeException ex) {
-            // Handle case where user not found or any error
-            return ResponseEntity.badRequest().body("Error saving feedback: " + ex.getMessage());
-        }
-    }
-}
-*/
