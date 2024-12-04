@@ -24,7 +24,7 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
     private final JavaMailSender mailSender;
 
-    @Value("${app.reset-password-url:http://localhost:8080/api/users/reset-password}")
+    @Value("${app.reset-password-url:http://localhost:4200/login}")   //http://localhost:4200/login     ----   ("${app.reset-password-url:http://localhost:8080/api/users/reset-password}")
     private String resetPasswordUrl;
 
     // Using ConcurrentHashMap for thread-safety (though it's not strictly necessary in this example)
@@ -102,10 +102,10 @@ public class UserService {
         userRepository.save(user);
 
         String resetLink = resetPasswordUrl + "?token=" + token + "&email=" + email;
-        sendEmail(email, "Password Reset Request", "To reset your password, please click the link below:\n" + resetLink);
+        sendEmail(email, "Password Reset Request", "To reset your password, please click the link below:\n" + resetLink+" \n" +"your token for password reset : "+token );
         return true;
     }
-
+ 
     public boolean resetPassword(String email, String token, String newPassword) {
         Optional<User> optionalUser = userRepository.findByEmail(email);
         if (optionalUser.isPresent()) {
