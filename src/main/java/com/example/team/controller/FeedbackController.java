@@ -16,14 +16,14 @@ public class FeedbackController {
     // Endpoint to save feedback for a user identified by email
     @PostMapping("/{userEmail}")
     public ResponseEntity<String> saveFeedback(@PathVariable String userEmail, @RequestBody FeedbackDTO feedbackDTO) {
-        try {
+          try {
             // Saving feedback using the service layer
-            feedbackService.saveFeedback(userEmail, feedbackDTO);
-            return ResponseEntity.ok("Feedback saved successfully!");
+                feedbackService.saveFeedback(userEmail, feedbackDTO);
+                return ResponseEntity.ok("Feedback saved successfully!");
         } catch (RuntimeException ex) {
             // Handling errors like user not found
-            return ResponseEntity.badRequest().body("Error saving feedback: " + ex.getMessage());
-        }
+                return ResponseEntity.badRequest().body("Error saving feedback: " + ex.getMessage());
+            } 
     }
 
     // Endpoint to fetch feedback for a user by email
