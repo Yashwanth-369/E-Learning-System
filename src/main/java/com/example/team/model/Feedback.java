@@ -1,6 +1,88 @@
 package com.example.team.model;
 
 import jakarta.persistence.*;
+
+@Entity
+@Table(name = "feedback")
+public class Feedback {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;  // Many feedback entries can belong to one user
+
+    @Column(name = "rating")
+    private Integer rating;  // Rating (1-5)
+
+    @Column(name = "feedback_comments", length = 500)
+    private String feedbackComments;  // Feedback comments
+
+    @Column(name = "favorite_fields", length = 500)
+    private String favoriteFields;  // A single string for favorite fields (e.g., comma-separated)
+
+    // Constructors
+    public Feedback() {}
+
+    public Feedback(User user, Integer rating, String feedbackComments, String favoriteFields) {
+        this.user = user;
+        this.rating = rating;
+        this.feedbackComments = feedbackComments;
+        this.favoriteFields = favoriteFields;
+    }
+
+    // Getters and Setters
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Integer getRating() {
+        return rating;
+    }
+
+    public void setRating(Integer rating) {
+        this.rating = rating;
+    }
+
+    public String getFeedbackComments() {
+        return feedbackComments;
+    }
+
+    public void setFeedbackComments(String feedbackComments) {
+        this.feedbackComments = feedbackComments;
+    }
+
+    public String getFavoriteFields() {
+        return favoriteFields;
+    }
+
+    public void setFavoriteFields(String favoriteFields) {
+        this.favoriteFields = favoriteFields;
+    }
+}
+
+
+
+
+
+
+/* package com.example.team.model;
+
+import jakarta.persistence.*;
 import java.util.List;
 
 @Entity

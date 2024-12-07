@@ -1,5 +1,51 @@
 package com.example.team.dto;
 
+public class FeedbackDTO {
+
+    private Integer rating; // User rating (e.g., 1-5)
+    private String feedbackComments; // Comments provided by the user
+    private String favoriteFields; // Single string to store favorite fields (e.g., comma-separated)
+
+    // Constructors
+    public FeedbackDTO() {
+    }
+
+    public FeedbackDTO(Integer rating, String feedbackComments, String favoriteFields) {
+        this.rating = rating;
+        this.feedbackComments = feedbackComments;
+        this.favoriteFields = favoriteFields;
+    }
+
+    // Getters and Setters
+    public Integer getRating() {
+        return rating;
+    }
+
+    public void setRating(Integer rating) {
+        this.rating = rating;
+    }
+
+    public String getFeedbackComments() {
+        return feedbackComments;
+    }
+
+    public void setFeedbackComments(String feedbackComments) {
+        this.feedbackComments = feedbackComments;
+    }
+    
+    public String getFavoriteFields() {
+        return favoriteFields;
+    }
+
+    public void setFavoriteFields(String favoriteFields) {
+        this.favoriteFields = favoriteFields;
+    }
+}
+
+
+
+/*package com.example.team.dto;
+
 import java.util.List;
 
 public class FeedbackDTO {
@@ -43,3 +89,4 @@ public class FeedbackDTO {
         this.favoriteFields = favoriteFields;
     }
 }
+*/
