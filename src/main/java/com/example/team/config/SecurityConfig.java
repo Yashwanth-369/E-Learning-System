@@ -53,7 +53,7 @@ public class SecurityConfig {
                 ).permitAll()
 
 
-                .requestMatchers("/api/feedback/**").permitAll()
+                //.requestMatchers("/api/feedback/**").permitAll()
 
                 // User-specific endpoints
                 // .requestMatchers("/user/**").hasRole("student")
