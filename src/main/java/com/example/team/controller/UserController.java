@@ -29,7 +29,7 @@ public class UserController {
 
     @PostMapping("/verify-otp")
     @CrossOrigin(origins = "http://localhost:4200")
-    public ResponseEntity<String> verifyOtp(@RequestParam("email") String email, @RequestParam("otp") String otp) {
+    public ResponseEntity<String> verifyOtp(@RequestParam String email, @RequestParam String otp) {
         boolean isVerified = userService.verifyOtp(email, otp);
         if (isVerified) {
             return ResponseEntity.ok("OTP verified successfully!");
@@ -74,8 +74,8 @@ public class UserController {
 
     @PostMapping("/reset-password")
     public ResponseEntity<String> resetPassword(
-            @RequestParam("token") String token,
-            @RequestParam("email") String email,
+            @RequestParam String token,
+            @RequestParam String email,
             @RequestBody String newPassword) {
         
         boolean isPasswordReset = userService.resetPassword(email, token, newPassword);

@@ -63,7 +63,7 @@ public class DurationController {
 
     // Endpoint to get durations by type
     @GetMapping("/type")
-    public ResponseEntity<List<DurationDTO>> getDurationsByType(@RequestParam("type") String type) {
+    public ResponseEntity<List<DurationDTO>> getDurationsByType(@RequestParam String type) {
         List<DurationDTO> durations = durationService.getDurationsByType(type);
         return ResponseEntity.ok(durations);
     }
@@ -77,7 +77,7 @@ public class DurationController {
 
     // Endpoint to get durations containing a specific keyword in the description
     @GetMapping("/description")
-    public ResponseEntity<List<DurationDTO>> getDurationsByDescriptionKeyword(@RequestParam("keyword") String keyword) {
+    public ResponseEntity<List<DurationDTO>> getDurationsByDescriptionKeyword(@RequestParam String keyword) {
         List<DurationDTO> durations = durationService.getDurationsByDescriptionKeyword(keyword);
         return ResponseEntity.ok(durations);
     }

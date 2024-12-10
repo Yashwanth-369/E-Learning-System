@@ -56,7 +56,7 @@ public class CourseController {
     @PatchMapping("/{id}/availability")
     public ResponseEntity<String> updateCourseAvailability(
             @PathVariable Long id,
-            @RequestParam("available") boolean available) {
+            @RequestParam boolean available) {
         String responseMessage = courseService.updateCourseAvailability(id, available);
         if ("Course not found!".equals(responseMessage)) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(responseMessage);
